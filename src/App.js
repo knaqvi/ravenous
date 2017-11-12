@@ -16,14 +16,14 @@ let business = {
  reviewCount: 90
 }
 
-const businesses = {
+const businesses = [
   business,
   business,
   business,
   business,
   business,
   business
-}
+];
 
 class App extends React.Component {
   render() {
@@ -31,7 +31,7 @@ class App extends React.Component {
       <div class="App">
       <h1>ravenous</h1>
         <SearchBar />, document.getElementById('app')
-        <BusinessList businesses={this.businesses} /> document.getElementById('app')
+        <BusinessList businesses={this.businesses} />, document.getElementById('app')
       </div>
     );
   }
