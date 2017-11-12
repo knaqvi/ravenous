@@ -23,8 +23,8 @@ class App extends React.Component {
     return (
       <div className="App">
       <h1>ravenous</h1>
-        <SearchBar /> document.getElementById('app')
-        <BusinessList businesses={businesses} /> document.getElementById('app')
+        <SearchBar />
+        <BusinessList businesses={businesses} />
       </div>
     );
   }
