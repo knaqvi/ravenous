@@ -13,33 +13,34 @@ https://api.yelp.com/oauth2/token?grant_type=client_credentials&client_id=${clie
       }).then(jsonResponse => {
         accessToken = jsonResponse.access_token;
       });
-  }
-},
+  },
 
-search(term, location, sortBy) {
-  return Yelp.getAccessToken().then(() => {
-    return fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`,
+
+  search(term, location, sortBy) {
+    return Yelp.getAccessToken().then(() => {
+      return fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`,
       {
-        headers: Authorization=`Bearer ${accessToken}`
+        headers: { Authorization: `Bearer ${accessToken}` }
       });
-  }).then(response => {
-    return response.json();
-  }).then(jsonResponse => {
-    if(jsonResponse.businesses) {
-      return jsonResponse.businesses.map(business => {
-        id: business.id,
-        imageSrc: business.image_url,
-        name: business.name,
-        address: business.location.address1,
-        city: business.location.city,
-        state: business.location.state,
-        zipCode: business.location.postal_code,
-        category: business.categories[0],
-        rating: business.rating,
-        reviewCount: business.review_count
+      }).then(response => {
+        return response.json();
+      }).then(jsonResponse => {
+        if(jsonResponse.businesses) {
+          return jsonResponse.businesses.map(business => ({
+            id: business.id,
+            imageSrc: business.image_url,
+            name: business.name,
+            address: business.location.address1,
+            city: business.location.city,
+            state: business.location.state,
+            zipCode: business.location.postal_code,
+            category: business.categories[0],
+            rating: business.rating,
+            reviewCount: business.review_count
+          }));
+        }
       });
     }
-  })
 };
 
 export default Yelp;
