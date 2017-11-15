@@ -2,7 +2,7 @@ const clientId = 'bnrIMYaQ2WWXjUAXsWG83Q';
 const secret = 'ijkiZsiaOj7ajSzbizMtRDcKPec2T58nmjB9DaZcUFYmpZdkH9psyZXzFrM3NKSj';
 let accessToken = '';
 
-let Yelp = {
+const Yelp = {
   getAccessToken() {
     if (accessToken) {
       return new Promise(resolve => resolve(accessToken));
@@ -14,7 +14,7 @@ https://api.yelp.com/oauth2/token?grant_type=client_credentials&client_id=${clie
         accessToken = jsonResponse.access_token;
       });
   }
-}
+},
 
 search(term, location, sortBy) {
   return Yelp.getAccessToken().then(() => {
@@ -34,12 +34,12 @@ search(term, location, sortBy) {
         city: business.location.city,
         state: business.location.state,
         zipCode: business.location.postal_code,
-        category: business.categories[0].title,
+        category: business.categories[0],
         rating: business.rating,
         reviewCount: business.review_count
       });
     }
   })
-}
+};
 
 export default Yelp;
