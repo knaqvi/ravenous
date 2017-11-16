@@ -34,7 +34,7 @@ https://api.yelp.com/oauth2/token?grant_type=client_credentials&client_id=${clie
             city: business.location.city,
             state: business.location.state,
             zipCode: business.location.postal_code,
-            category: business.categories[0],
+            category: business.categories[0].title,
             rating: business.rating,
             reviewCount: business.review_count
           }));
